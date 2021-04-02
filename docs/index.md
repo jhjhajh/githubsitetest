@@ -43,7 +43,7 @@
 5. [Command Summary](#5.-Command-Summary)
 6. [FAQ](#6.-FAQ)
 
-##1. Introduction
+## 1. Introduction
 
 Welcome to the user guide for our application, Connoisseur!
 With over 4.6 thousand restaurants in Singapore, endless number of entertainment options and never-ending list of
