@@ -98,7 +98,7 @@
        
     Appendix F: [Instructions for manual testing](#appendix-e-glossary)
    
-##1. Preface
+## 1. Preface
 Connoisseur is a desktop application for managing and storing a list of personal reviews on experiences, and a list of 
 recommendations to try next.
 
