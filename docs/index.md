@@ -204,6 +204,9 @@ When the user attempts to add a new recommendation,
 ###5.4.1 Storage Format
 ###5.4.2 Implementation
 ###5.5 Error handling
+####Invalid Input Format
+####Invalid File
+####
 ###5.6 Personalised Messages
 ##6. Planned Features
 ##7. Documentation
@@ -215,10 +218,6 @@ When the user attempts to add a new recommendation,
 ###8.2 Types of tests
 ##Appendix
 ###Appendix A: Product Scope
-####Target User Profile
-<ol> jirjf</ol>
-
-####Value Proposition
 ###Appendix B: User Stories
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
