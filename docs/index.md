@@ -13,6 +13,7 @@
    3.2 [Setting up the project in your computer](#32-setting-up-the-project-in-your-computer)
 
    3.3 [Verifying the setup](#33-verifying-the-setup)
+   
    3.4 [Configure coding style](#34-configure-the-coding-style)
 
 4. [Design](#4-design)
