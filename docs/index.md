@@ -1,370 +1,101 @@
-# Developer Guide
+
+# Install Ambience 2020
 
 ## Table of Contents
 
-1. [Preface](#1-preface)
+1. [Requirements](#1-requirements)
+2. [Steps](#2-steps)
 
-2. [How to use this document](#2-how-to-use-this-document)
-
-3. [Setting up](#3-setting-up)
-
-   3.1 [Prerequisites](#31-prerequisites)
-
-   3.2 [Setting up the project in your computer](#32-setting-up-the-project-in-your-computer)
-
-   3.3 [Verifying the setup](#33-verifying-the-setup)
+   2.1 [Install Docker/ Docker Compose](#21-install-docker-or-docker-compose)
    
-   3.4 [Configure coding style](#34-configure-the-coding-style)
+      * [Ubuntu](#ubuntu)
+      
+      * [MacOS](#macos)
 
-4. [Design](#4-design)
+      * [Windows](#windows)
 
-   4.1 [Architecture: High Level View](#41-architecture-high-level-view)
+   2.2 [Access Token](#22-access-token)
 
-   4.2 [UI and Messages component](#42-ui-and-component)
+   2.3 [Run Installation Script](#23-run-installation-script)
 
-   4.3 [Parser component](#43-parser-component)
+3. [Deploy Elixir Ambience Licence](#3-deploy-elixir-ambience-license)
+4. [Demo video](#4-demo-video)
 
-   4.4 [Review component](#44-review-componenet)
+## 1. Requirements
 
-   4.5 [Recommendation component](#45-review-componenet)
+Ambience has to be installed on a Unix OS, including MacOS, Linux and Windows with WSL2.
 
-   4.6 [Commands component](#46-commands-component)
 
-   4.7 [Sorter component](#47-sorter-component)
+What you need:
 
-   4.8 [Storage component](#48-storage-component)
+• UnixOS as Ubuntu, OSx, Windows with WSL2
 
-5. [Implementation](#5-implementation)
+• Docker Desktop/ Docker Engine and Docker compose
 
-   5.1 [Mode Switch Feature](#51-mode-switch-feature)
+• Access token and Elixir Ambience License, which can be requested from sales@elixirtech.com
 
-   5.2 [Review Mode](#52-review-Mode)
 
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.2.1 [Add a Review Feature](#521-add-a-review-feature)
+## 2. Steps
 
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.2.2 [List Reviews Feature](#522-list-reviews-feature)
+### 2.1 Install Docker or Docker Compose
 
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.2.3 [Sort Reviews Feature](#523-sort-reviews-feature)
+###  Ubuntu
 
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.2.4 [View a Review Feature](#524-view-a-review-feature)
+Click on this [link](https://linuxconfig.org/how-to-install-docker-on-ubuntu-20-04-lts-focal-fossa) for more information.
 
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.2.5 [Edit a Review Feature](#525-edit-a-review-feature)
+`sudo apt-get update`
 
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.2.6 [Delete a Review Feature](#526-delete-a-review-feature)
+`sudo apt-get install docker.io`
 
-   5.3 [Recommendation Mode](#53-recommendation-mode)
+`sudo systemctl enable --now docker`
 
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.3.1 [Add a Recommendation Feature](#531-add-a-recommendation-feature)
+`sudo usermod -a -G docker ubuntu`
 
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.3.2 [List Recommendation Feature](#532-list-recommendation-feature)
+`sudo apt install docker-compose`
 
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.3.3 [Edit a Recommendation Feature](#533-edit-a-recommendation-feature)
+Remember to start docker after installation.
 
-   5.4 [Storage](#54-storage)
 
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.4.1 [Storage Format](#541-storage-format)
+###  MacOS
 
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.4.2 [Implementation](#542-implementation)
+Click on this [link](https://docs.docker.com/docker-for-mac/install/) for more information on Docker installation on MacOS.
 
-   5.5 [Error handling](#55-error-handling)
 
-   5.6 [Personalised Messages](#56-personalised-messages)
+###  Windows
 
-6. [Planned Features](#6-planned-features)
+Windows WSL2 with docker integration
 
-7. [Documentation](#7-documentation)
+Click on this [link](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers) for wsl tools installation, and this [link](https://docs.docker.com/docker-for-windows/install/) for docker installation on windows.
 
-   7.1 [Setting up and maintaining the project website](#71-setting-up-and-maintaining-the-project-website)
 
-   7.2 [Style guidance](#72-style-guidance)
+### 2.2 Access Token
 
-   7.3 [Diagrams](#73-diagrams)
+An access token is required to start the process. You may obtain the token [here](https://drive.google.com/file/d/100cjveaPgcUAZJ5gL8j_aFHcm_PHmau1/view?usp=sharing).
 
-8. [Testing](#8-testing)
 
-   8.1 [Running tests](#81-running-tests)
+### 2.3 Run Installation Script
 
-   8.2 [Types of tests](#82-types-of-tests)
 
-9. [Appendix](#appendix)
+ You can run script to complete Ambience docker deployment and run docker-compose.
 
-   Appendix A: [Product Scope](#appendix-a-product-scope)
-    * [Target User Profile](#target-user-profile)
-    * [Value Proposition](#value-proposition)
+ This script is designed to install Ambience and Mongodb on a clean system. If you have Mongodb running locally on port 27017 already running you may like to stop the db service first.
 
-   Appendix B: [User Stores](#appendix-b-user-stories)
+`wget http://www.ambience.cloud/docker/setup-ambience-compose.sh`
 
-   Appendix C: [Use Cases](#appendix-c-use-cases)
+`chmod 775 ./setup-ambience-compose.sh`
 
-   Appendix D: [Non-Functional Requirements](#appendix-d-non-functional-requirements)
+run setup-ambience-compose.sh script and an optional parameter as "aws" for an EC2 instance or "local" for running on your system.
 
-   Appendix E: [Instructions for manual testing](#appendix-e-glossary)
-   <ul>Launch and Shutdown</ul>
-   <ul>Adding a Review</ul>
-   <ul>Editing a Review</ul>
-   <ul>Listing Reviews</ul>
-   <ul>Sorting Reviews</ul>
-   <ul>Deleting a review</ul>
-   <ul>Viewing the full details of a review</ul>
-   <ul>Adding a Recommendation</ul>
-   <ul>Editing a Recommendation</ul>
-   <ul>Listing Recommendations</ul>
-   <ul>Deleting a Recommendation</ul>
-   <ul>Marking a Recommendation as Done</ul>
-   <ul>Help</ul>
-   <ul>Data storage</ul>
+`./setup-ambience-compose.sh` [optional local or aws]
 
-   Appendix F: [Glossary](#appendix-f-glossary)
+The Ambience server will be started. You access the Web UI at http://localhost:1740 or AWS http://[public aws dns host]:1740. On AWS, please ensure that 1740 port is accessible to you.
 
-## 1. Preface
 
-Connoisseur is a desktop application for managing and storing a list of personal reviews on experiences, and a list of
-recommendations to try next.
+## 3. Deploy Elixir Ambience Licence
 
-The Developer Guide for Connoisseur v2.1 is designed for developers intending to improve Connoisseur, by fixing bugs, or
-perhaps adding entirely new features. It explains how the project is set up, the architecture used, and the code style
-you should adopt when contributing code to the project.
 
-## 2. How to use this document
+After Ambience has started. The next step is to deploy the licence file, ElixirAmbience.licence. At Web UI, "Service Chooser" and select the licence deploy module to deploy the licence then logout.
 
-//TODO//
+Ambience server has to be restarted. Go the console and at ambience folder and run the command below.
 
-## 3. Setting up
-
-The following section describes how to set up the coding environment on your own computer, in order to start writing
-code to improve Connoisseur.
-
-### 3.1 Prerequisites
-
-1. JDK 11 <br>
-   [Download JDK 11](#https://www.oracle.com/sg/java/technologies/javase-jdk11-downloads.html)
-2. *Recommended integrated development environment for coding* : IntelliJ IDEA<br>
-   [Download IntelliJ IDEA](#https://www.jetbrains.com/idea/)
-
-### 3.2 Setting up the project in your computer
-
-> <p>&#10071 Follow the steps in the following guide precisely. Things will not work out if you deviate in some steps.
-
-1. **Fork** this repo, and **clone** the fork into your computer.
-2. Open IntelliJ (if you are not in the welcome screen, click **`File`** > **`Close Project`** to close the existing
-   project dialog first).
-3. Set up the correct JDK version for Gradle  
-   a. Click **`Configure`** > **`Project Defaults`** > **`Project Structure`**  
-   b. Click **`New...`** and find the directory of the JDK.
-4. Click **`Import Project`**.
-5. Locate the **`build.gradle`** file and select it. Click **`OK`**.
-6. Click **`Open as Project`**.
-7. Click **`OK`** to accept the default settings.
-
-### 3.3 Verifying the setup
-
-### 3.4 Configure Coding style
-
-If using IDEA, follow the
-guide [[se-edu/guides] IDEA: Configuring the code style](https://se-education.org/guides/tutorials/intellijCodeStyle.html)
-to set up IDEA’s coding style to match ours.
-
-> Optionally, you can follow the guide [[se-edu/guides] Using Checkstyle](https://se-education.org/guides/tutorials/checkstyle.html)
-> to find how to use the CheckStyle within IDEA e.g., to report problems as you write code.
-
-## 4. Design
-
-The following section describes the design and implementation of the product. We use UML diagrams and code snippets to
-explain some aspects of the code. If you are unfamiliar with UML, the diagrams should still be fairly understandable.
-However, you may wish to
-consult [[CS2113/T] Modeling](https://nus-cs2113-ay2021s1.github.io/website/se-book-adapted/chapters/modeling.html) for
-a quick introduction to UML.
-
-### 4.1 Architecture: High Level View
-
-**How the architecture components interact with each other**
-
-The following Figure 1, provides a rough overview of how **Connoisseur** is built.<br>
-
-Figure 1. Architecture Diagram of Connoisseur <br>
-//TODO ADD PLANTUML DIAGRAM !missing! sorter component// <br>
-
-As shown in Figure 1, the user interacts with the`UI` component and types in input. Messages displayed to the user by
-the `UI` component comes from the `Messages` component. Input from user is passed to the `parser` component, which is
-interpreted as a command and passed to the `Commands` component. Either `Storage`, `ReviewList` or `RecommendationList`
-component executes the command input by the user. These components may produce outputs which are passed to the `UI`
-component and seen by the user. This is explained in more detail in the following sections.
-
-### 4.2 UI and Messages component
-
-The user interface of Connoisseur is provided by the classes UI & Messages. It is instantiated once in the connoisseur()
-method.<br>
-//can add code snippet here//
-
-* The ui.printGreeting() method is called to display the welcome message to the user.
-* The ui.println(COMMAND_PROMPT) method is called to prompt the user for input, where COMMAND_PROMPT is a message from
-  the `Messages` component
-* The ui.readCommand() method reads the input which is then passed on to the `parser` component
-
-### 4.3. Parser component
-
-### 4.4. Review component
-
-### 4.5. Recommendation component
-
-### 4.6. Commands component
-
-### 4.7. Sorter component
-
-### 4.8. Storage component
-
-## 5. Implementation
-
-### 5.1 Mode Switch Feature
-
-### 5.2 Review Mode
-
-### 5.2.1 Add a Review Feature
-
-### 5.2.2 List Reviews Feature
-
-### 5.2.3 Sort Reviews Feature
-
-### 5.2.4 View a Review Feature
-
-### 5.2.5 Edit a Review Feature
-
-### 5.2.6 Delete a Review Feature
-
-### 5.3 Recommendation Mode
-
-### 5.3.1 Add a Recommendation Feature
-
-When the user attempts to add a new recommendation,
-
-### 5.3.2 List Recommendation Feature
-
-### 5.3.3 Edit a Recommendation Feature
-
-### 5.3.4 Delete a Recommendation Feature
-
-### 5.3.5 Review a Recommendation Feature
-
-### 5.4 Storage
-
-### 5.4.1 Storage Format
-
-### 5.4.2 Implementation
-
-### 5.5 Error handling
-
-Connoisseur provides default error handling. The default error handling system handles invalid input format and invalid
-file errors with exceptions. Connoisseur also has a customized exception, the duplicate exception. You can also choose
-to define your own custom error handling by creating custom exceptions.
-
-*Duplicate Exception*
-The Duplicate Exception is used to handle titles of reviews or recommendations that are input by the user. If the title
-input is found, duplicate exception will be thrown.
-
-The Duplicate Exception is thrown in addRecommendationDetails(), if the checkAndPrintDuplicateRecommendation(title)
-returns true. This error will be caught in the addRecommendation() method.
-
-### 5.6 Personalised Messages
-
-## 6. Planned Features
-
-## 7. Documentation
-
-### 7.1 Setting up and maintaining the project website
-
-### 7.2 Style guidance
-
-### 7.3 Diagrams
-
-## 8. Testing
-
-### 8.1 Running tests
-
-### 8.2 Types of tests
-
-## Appendix
-
-### Appendix A: Product Scope
-
-**Target User Profile**
-
-* is a university student
-* has a desire to record a significant number of experiences
-* wants to manage a bucket list
-* can type fast and prefers typing to mouse interactions
-* is comfortable using the command line interface
-
-**Value Proposition**
-
-* Connoisseur helps users to consolidate their experiences, `review` and bucket lists, `recommendation` in an organised
-  way. The user just needs to input their experiences or what they wish to experience, and Connoisseur will help to
-  consolidate them.
-* These `review` and `recommendation` can be edited or deleted as the user wishes.
-* A `recommendation` can be turned into a `review` once the user marks it as done, making it convenient for the user to
-  record their experiences.
-* Connoisseur also allows users to have a consolidated view `review` and `recommendation` lists. Connoisseur even offers
-  the option to sort `review` lists according to the user preference, namely by date earliest, date latest, ratings and
-  category.
-
-### Appendix B: User Stories
-
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v1.0|user|see the number of recommendations I have|keep track of the number of reviews I've made|
-|v1.0|user|be able to save my previous recommendations|refer to the old entries that I have|
-|v1.0|busy user|be able to do quick ratings|save time|
-|v1.0|user|delete selected items that I no longer wish to recommend|edit my list according to my liking|
-|v1.0|busy user|have a template to guide my reviews|input my reviews quickly|
-|v2.0|indecisive user|change my review and opinions on things|record my opinions accurately at all times|
-|v2.0|forgetful user|be prompted of an existing review|avoid duplicates in my list|
-|v2.0|lazy user|have my sorting preferences saved|avoid having to input my preferred sorting method all the time|
-
-### Appendix C: Non-Functional Requirements
-
-1. Should work on any *mainstream OS* as long as it has `Java 11` installed.
-2. A user with above average typing speed for regular English text should be able to use the features of Connoisseur
-   faster than by using the mouse.
-3. A user who wants to modify the save file can do so by using an application that is able to edit JSON files.
-
-### Appendix D: Instructions for manual testing
-
-Given below are instructions to test the app manually.
-
-**Launch and Shutdown**
-
-1. Initial launch
-
-   &nbsp;i. Ensure that you have **Java 11** or above installed.
-
-   &nbsp;ii. Download the latest version of **Connoisseur** here (add link later)
-
-   &nbsp;iii. Copy the downloaded Connoisseur.jar into your **Desktop**.
-
-   &nbsp;iv. Open terminal and enter `cd Desktop`.
-
-   &nbsp;v. Then, enter `java -jar Connoisseur.jar`. &nbsp;&nbsp;**Expected**: Shows the command line interface with
-   welcome message.
-
-
-2. Shutdown Connoisseur
-
-i. Enter `exit` or `bye` into terminal while **Connoisseur** is running.
-
-&nbsp; **Expected**: A farewell message by Connoisseur will be shown.
-
-### Appendix E: Other Guides: Documentation, Testing, Dev-ops
-
-This section contains links to other relevant guides that may be of use.
-
-* [Documentation guide](DocumentationGuide.md)
-* [Testing guide](TestingGuide.md)
-* [Dev-ops guide](DevopsGuide.md)
-
-### Appendix F: Glossary
-
-* Mainstream OS: Windows, Linux, Unix, OS-X
-* Review: An experience a user has experienced, and intends to record. It could be a movie, restaurant, activity, etc.
-* Recommendation: An experience a user wishes to experience, and wishes to record. It could be a movie, restaurant,
-  activity, etc. It can be converted to a review after a user marks it as done.
-* Command: An instruction meant to update the ReviewList or RecommendationList in a certain way.
+`docker-compose restart elx-ambience`
